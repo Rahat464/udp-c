@@ -1,6 +1,5 @@
 // This is a simple implementation of a UDP server that sends a datagram to a client.
 // The aim is to follow RFC 768 (https://tools.ietf.org/html/rfc768)
-// TODO: FIX CLIENT NOT BEING ABLE TO RECEIVE DATAGRAM
 #include "Datagram.h"
 #include "PseudoHeader.h"
 
@@ -98,13 +97,6 @@ int main() {
     datagram->length = htons(8 + strlen(payload));
     datagram->checksum = htons(calculateChecksum(pH, payload));
     strcpy(datagram->data, payload);
-    // struct Datagram* datagram = initDatagram(
-    //    0,
-    //    54321,
-    //    8 + strlen(payload), // ( 4 headers * 16 bits ) + ( message length * 8 bits )
-    //    calculateChecksum(pH, payload),
-    //    payload
-    // );
 
 
     /* sendto() sends a datagram to the specified address and port
